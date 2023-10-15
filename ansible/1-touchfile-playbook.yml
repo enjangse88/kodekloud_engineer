@@ -1,0 +1,8 @@
+---
+- hosts: stapp01
+  tasks:
+  - name: creating new file
+    file:
+      path: "/tmp/file.txt"
+      state: touch
+    become: yes

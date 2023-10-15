@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Installed HTTPD
+      yum:
+        name: httpd
+        state: installed
+    - name: State service httpd
+      service:
+        name: httpd
+        state: started
