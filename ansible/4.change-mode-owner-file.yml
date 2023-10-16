@@ -1,0 +1,11 @@
+---
+- hosts: stapp01, stapp02, stapp03
+  become: true
+  tasks:
+    - name: Create file and change ownership
+      file:
+        path: /usr/src/nfsshare.txt
+        owner: '{{ ansible_user }}'
+        group: '{{ ansible_user }}'
+        mode: 0744
+        state: touchs

@@ -1,0 +1,7 @@
+adduser -u 1124 -d /var/www/siva siva
+
+groupadd nautilus_developers
+usermode -a -G nautilus_developers linux_user
+
+#adduser without home directory
+adduser -M yousuf

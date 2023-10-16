@@ -1,0 +1,13 @@
+---
+- name: Archieve playbook
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  become_user: root
+  tasks:
+    - name: archieve the folder
+      archive:
+        path: /usr/src/security/
+        dest: /opt/security/beta.tar.gz
+        format: gz
+        owner: '{{ ansible_user }}'
+        group: '{{ ansible_user }}'
