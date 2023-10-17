@@ -5,3 +5,57 @@ usermode -a -G nautilus_developers linux_user
 
 #adduser without home directory
 adduser -M yousuf
+
+#adduser user with expiration date
+adduser jim -e 2021-01-28
+#check user expiration date 
+chage -l jim
+
+find /home/usersdata -type f -user javed -exec cp --parents {} /ecommerce \;
+
+tar -zcvf name.tar.gz /data/backup
+
+
+sed -i 's/old-text/new-text/g' namefile.txt
+
+chmod o+rx /tmp/xfusioncorp.sh 
+
+#allow and deny user to crontab
+vi /etc/cron.allow 
+/etc/cron.deny
+
+#set permission user in file 
+getfacl /etc/hostname(filename)
+#give permission to jerome to read, but do not give permission to mariyam
+setfacl -m u:mariyam:-,jerome:r /etc/hostname
+
+Linux GUI default
+systemctl get-default
+systemctl start graphical.target
+systemctl status graphical.target
+systemctl set-default graphical.target 
+systemctl get-default 
+
+#firewalld
+firewall-cmd --zone=public --list-all
+firewall-cmd --zone=public --add-port=3000/tcp 
+firewall-cmd --reload 
+systemctl reload firewalld 
+firewall-cmd --zone=public --list-ports 
+
+security limit process
+vi /etc/security/limits.conf
+-- soft limit  
+nfsuser   soft  nproc  1024 
+-- hard limit
+nfsuser   hard  nproc  2026
+
+#Selinux
+yum install selinux* -y
+check status selinux 
+sestatus
+configuration selinux 
+vi /etc/selinux/config 
+Change SELINUX=disabled for disable status form config file
+enfroce selinux to disable
+getenforce 0 

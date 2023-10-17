@@ -1,0 +1,15 @@
+---
+- name: HTTPD playbook
+  hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install HTTPD
+      package:
+        name: httpd
+        state: installed
+    - name: start HTTPD
+      service:
+        name: httpd
+        enabled: true
+        state: started

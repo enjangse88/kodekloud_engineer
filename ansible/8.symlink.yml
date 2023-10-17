@@ -1,0 +1,31 @@
+---
+- name: symlink playbook
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  tasks:
+    - name: stapp01 
+      file:
+        path: /opt/itadmin/blog.txt
+        owner: tony
+        group: tony
+        state: touch
+      when: inventory_hostname == "stapp01"
+    - name: stapp02
+      file:
+        path: /opt/itadmin/story.txt
+        owner: steve
+        group: steve
+        state: touch
+      when: inventory_hostname == "stapp02"
+    - name: stapp03
+      file:
+        path: /opt/itadmin/media.txt
+        owner: banner
+        group: banner
+        state: touch
+      when: inventory_hostname == "stapp03"
+    - name: create symlink
+      file:
+        src: /opt/itadmin
+        dest: /var/www/html
+        state: link
