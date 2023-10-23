@@ -1,0 +1,45 @@
+---
+- name: ACL playbook
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  become_user: root
+  tasks:
+    - name: stapp01
+      file:
+        path: /opt/security/blog.txt
+        state: touch
+      when: ansible_hostname == "stapp01"
+    - name: ACL stapp01
+      acl:
+        path: /opt/security/blog.txt
+        entity: tony
+        etype: group
+        permissions: r
+        state: present
+      when: ansible_hostname == "stapp01"
+    - name: stapp02
+      file:
+        path: /opt/security/story.txt
+        state: touch
+      when: ansible_hostname == "stapp02"
+    - name: ACL stapp02
+      acl:
+        path: /opt/security/story.txt
+        entity: steve
+        etype: user
+        permissions: rw
+        state: present
+      when: ansible_hostname == "stapp02"
+    - name: stapp03
+      file:
+         path: /opt/security/media.txt
+         state: touch
+      when: ansible_hostname == "stapp03"
+    - name: ACL stapp03
+      acl:
+        path: /opt/security/media.txt
+        entity: banner
+        etype: group
+        permissions: rw
+        state: present
+      when: ansible_hostname == "stapp03"

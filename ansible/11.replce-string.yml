@@ -1,0 +1,24 @@
+---
+- name: replace file
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  become_user: root
+  tasks:
+    - name: replace file
+      replace:
+        path: /opt/security/blog.txt
+        regexp: xFusionCorp
+        replace: Nautilus
+      when: ansible_hostname == "stapp01"
+    - name: replace file
+      replace:
+        path: /opt/security/story.txt
+        regexp: Nautilus
+        replace: KodeKloud
+      when: ansible_hostname == "stapp02"
+    - name: replace file
+      replace:
+        path: /opt/security/media.txt
+        regexp: "KodeKloud"
+        replace: "xFusionCorp Industries"
+      when: ansible_hostname == "stapp03"

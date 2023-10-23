@@ -1,0 +1,32 @@
+--- 
+- name: install playbook
+  hosts: all
+  become: yes
+  become_user: root
+  gather_facts: true
+  tasks:
+     - name: create a file
+       file:
+         path: /root/facts.txt
+         state: touch
+     - name: input architecture facts
+       blockinfile:
+          path: /root/facts.txt
+          block: |
+           Ansible manage this host is {{ ansible_architecture }}
+     - name: install httpd
+       package:
+          name: httpd
+          state: present
+     - name: copy file to index file
+       copy:
+         src: /root/facts.txt
+         dest: /var/www/html/index.html
+         owner: apache
+         group: apache
+         remote_src: yes
+    - name: start and enabled httpd
+      service: 
+        name: httpd
+        enabled : true
+        service: started

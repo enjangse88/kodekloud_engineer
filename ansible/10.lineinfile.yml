@@ -1,0 +1,31 @@
+---
+- name: HTTPD modification
+  hosts: stapp01, stapp02, stapp03
+  become: yes
+  become_user: root
+  tasks:
+    - name: install httpd 
+      package:
+         name: httpd
+         state: installed
+    - name: start httpd 
+      service:
+         name: httpd
+         enabled: true
+         state: started
+    - name: create a file
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          This is a Nautilus sample file, created using Ansible!
+    - name: add linefile
+      lineinfile:
+        path: /var/www/html/index.html
+        line: "Welcome to Nautilus Group!"
+        state: present
+    - name: change permission and owner
+      file:
+        path: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: 0777
