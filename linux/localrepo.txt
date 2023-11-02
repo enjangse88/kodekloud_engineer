@@ -1,0 +1,9 @@
+add new local repo 
+
+vi /etc/yum.repos.d/local.repo 
+
+[localyum]
+name=localrepo
+baseurl=file:///folder_package/package/
+enabled=1
+gpg_check=0

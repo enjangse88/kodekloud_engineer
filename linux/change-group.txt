@@ -1,0 +1,8 @@
+Setup a collaborative directory /sysadmin/data on app server 2 in Stratos Datacenter.
+
+
+The directory should be group owned by the group sysadmin and the group should own the files inside the directory. The directory should be read/write/execute to the user and group owners, and others should not have any access.
+
+mkdir -p /sysadmin/data
+chgrgp -R sysadmin /sysdamin/data 
+chmod -R 2770 /sysdamin/data

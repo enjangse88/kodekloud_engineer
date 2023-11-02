@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-envars
+spec:
+  containers:
+    - name: pod-container-envars
+      image: bash
+      env:
+        - name: GREETING
+          value: Welcome to
+        - name: COMPANY
+          value: xFusionCorp
+        - name: GROUP
+          value: group
+      command: ["sh","-c","echo $(GREETING) $(COMPANY) $(GROUP)"]

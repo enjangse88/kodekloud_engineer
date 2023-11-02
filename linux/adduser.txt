@@ -1,3 +1,4 @@
+
 adduser -u 1124 -d /var/www/siva siva
 
 groupadd nautilus_developers
@@ -12,6 +13,7 @@ adduser jim -e 2021-01-28
 chage -l jim
 
 find /home/usersdata -type f -user javed -exec cp --parents {} /ecommerce \;
+find /var/www/html/ecommerce -type f -name '*.css' -exec cp --parents {} /ecommerce \;
 
 tar -zcvf name.tar.gz /data/backup
 
@@ -59,3 +61,25 @@ vi /etc/selinux/config
 Change SELINUX=disabled for disable status form config file
 enfroce selinux to disable
 getenforce 0 
+
+USERNAME ALL=(ALL) NOPASSWD:ALL
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   labels:
+      name: nginx-app
+   name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       name: nginx-app
+  template:
+    metadata:
+      labels:
+        name: nginx-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
